@@ -82,7 +82,7 @@ def fuzzy_search(data: list, query: str, max_results: int):
     return fuzzy_indices
 
 
-def get_key_value_pairs(indices: list[int], data: list):
+def get_key_value_pairs(indices: list, data: list):
     results = []
     for index in indices:
         element = {
