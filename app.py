@@ -11,11 +11,6 @@ app = Flask(__name__)
 
 searcher = simpy_search.Searcher([])  # Default Value
 
-@app.after_request
-def add_headers(response):
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    return response
-
 @app.route('/')
 def index():
     return 'Simpy Search API'
