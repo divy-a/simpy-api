@@ -10,7 +10,7 @@ class Searcher():
         self.fuzzy_search = fuzzy_search
         self.key_value_pairs = key_value_pairs
 
-    def search(self, query: str) -> list[int] | list[object]:
+    def search(self, query: str):
 
         search_results = []
 
@@ -82,7 +82,7 @@ def fuzzy_search(data: list, query: str, max_results: int) -> list[int]:
     return fuzzy_indices
 
 
-def get_key_value_pairs(indices: list[int], data: list) -> list[object]:
+def get_key_value_pairs(indices: list[int], data: list):
     results = []
     for index in indices:
         element = {
