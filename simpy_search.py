@@ -46,7 +46,7 @@ class Searcher():
         self.data = data
 
 
-def basic_search(data: list, query: str, max_results: int) -> list[int]:
+def basic_search(data: list, query: str, max_results: int):
 
     starts_with_indices = []
     contains_indices = []
@@ -66,7 +66,7 @@ def basic_search(data: list, query: str, max_results: int) -> list[int]:
     return (starts_with_indices+contains_indices)[:max_results]
 
 
-def fuzzy_search(data: list, query: str, max_results: int) -> list[int]:
+def fuzzy_search(data: list, query: str, max_results: int):
 
     if max_results <= 0:
         return []
