@@ -1,24 +1,30 @@
 import simpy_search
 import json
 from flask import Flask, request
-import os
-from dotenv import load_dotenv
-load_dotenv()
-
-CODE = str(os.getenv('CODE'))
 
 app = Flask(__name__)
 
-searcher = simpy_search.Searcher([])  # Default Value
 
 @app.route('/')
 def index():
     return 'Simpy Search API'
 
-@app.route('/search')
-def search():
 
+@app.route('/search', methods=['POST'])
+def search():
     try:
+        searcher = simpy_search.Searcher([])
+        try:
+            data = json.loads(request.data)
+            data_value = data['data']
+            if isinstance(data_value, list):
+
+                searcher.data = data_value
+            else:
+                return {'message': 'Invalid data format.'}, 400
+        except Exception:
+            return {'message': 'Bad request.'}, 400
+
         query = request.args.get('q', default='', type=str)
         max_results = request.args.get(
             'max_results', default=searcher.max_results, type=int)
@@ -39,31 +45,6 @@ def search():
 
         return {'results': results}
     except:
-        return {'message': 'Bad request.'}, 400
-
-
-@app.route('/update_data', methods=['POST'])
-def update_data():
-
-    try:
-        data = json.loads(request.data)
-        code = data['code']
-        data_value = data['data']
-
-        if code == CODE:
-            if isinstance(data_value, list):
-                try:
-                    searcher.data = data_value
-                    return {'message': 'Data updated successfully.'}, 200
-                except Exception as e:
-                    print(e)
-                    return {'message': 'Unable to update data.'}, 400
-            else:
-                return {'message': 'Invalid data format.'}, 400
-        else:
-            return {'message': 'Unauthorized.'}, 401
-    except Exception as e:
-        print(e)
         return {'message': 'Bad request.'}, 400
 
 
