@@ -8,7 +8,7 @@ To get started with the API, follow the steps below:
 
 1. Install the required dependencies by running the following command:
 ```
-pip install flask
+pip install -r requirements.txt
 ```
 
 3. Start the Flask application by running the following command:
