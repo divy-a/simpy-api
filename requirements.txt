@@ -1,5 +1,4 @@
 Flask
 fuzzywuzzy
-python-dotenv
 requests
 Gunicorn
